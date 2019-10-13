@@ -11,8 +11,8 @@ public class Environment {
 	}
 	
 	public Environment(int r, int c) {
-		row = r;
-		column = c;
+		row = r+1;
+		column = c+1;
 		background = new  String[row][column];
 	}
 	
@@ -36,6 +36,23 @@ public class Environment {
 				}
 			}
 		}
+	}
+	
+	public void setContent(int r, int c, String value) {
+		background [r][c] = value;
+	}
+	
+	public String getContent(int r, int c) {
+		String content = background [r][c];
+		return content;
+	}
+	
+	public int height(){
+		return row-1; 
+	}
+	
+	public int length(){
+		return column-1; 
 	}
 	
 	public void printEnvironment() {

@@ -44,6 +44,7 @@ public class Environment {
 		}
 	}
 
+
 	public void drawBricks(Brick[] bricks){
 		for (Brick brick: bricks){
 			for (int i = 0; i != brick.getBrickLength();i++){

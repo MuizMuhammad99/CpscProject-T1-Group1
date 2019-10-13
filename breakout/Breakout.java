@@ -29,7 +29,6 @@ public class Breakout {
 				new Brick(1, 7, 21),
 				new Brick(1, 7, 29),
 
-
 		});
 		//console.setContent(2, console.length()/2, "H");
 		//console.setContent(2, console.length()/2+1, "I");

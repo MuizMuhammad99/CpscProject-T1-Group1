@@ -53,6 +53,5 @@ public class Brick extends Environment{
     }
 
     public void destroyBrick(){
-
     }
 }

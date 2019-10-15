@@ -37,7 +37,7 @@ public class Environment {
 			}
 		}
 	}
-
+	
 	public void drawBrick(Brick brick){
 		for (int i = 0; i != brick.getBrickLength();i++){
 			background[brick.getRowBrick()][brick.getColumnBrick()+i] = brick.getBrickType() +"";
@@ -52,16 +52,16 @@ public class Environment {
 			}
 		}
 	}
-
+	
 	public void setContent(int r, int c, String value) {
 		background [r][c] = value;
 	}
-
+	
 	public String getContent(int r, int c) {
 		String content = background [r][c];
 		return content;
 	}
-
+	
 	public int height(){
 		return row-1; 
 	}

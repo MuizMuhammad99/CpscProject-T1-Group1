@@ -1,6 +1,6 @@
 package breakout;
 
-public class Brick extends Environment{
+public class Brick {
     private int brickType;
     private int brickLength;
     private int rowBrick;
@@ -54,4 +54,5 @@ public class Brick extends Environment{
 
     public void destroyBrick(){
     }
+
 }

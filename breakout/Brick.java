@@ -1,6 +1,6 @@
 package breakout;
 
-public class Brick {
+public class Brick extends Breakout {
     private int brickType;
     private int brickLength;
     private int rowBrick;

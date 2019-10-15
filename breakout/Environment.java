@@ -1,6 +1,6 @@
 package breakout;
 
-public class Environment {
+public class Environment extends Breakout {
 	private String[][] background;
 	int row, column;
 	

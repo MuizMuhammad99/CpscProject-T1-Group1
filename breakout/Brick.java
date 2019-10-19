@@ -1,19 +1,17 @@
-package breakout;
+public class Brick {
+    private int brickType; // number of lives the bricks have
+    private int brickLength; // the length of the brick
+    private int rowBrick; // the row location of a piece of the brick
+    private int columnBrick; // the column location of a piece of the brick
 
-public class Brick extends Levels {
-    private int brickType;
-    private int brickLength;
-    private int rowBrick;
-    private int columnBrick;
-
-    public Brick(int brickType, int brickLength, int rowBrick, int columnBrick) {
+    public Brick(int brickType, int brickLength, int rowBrick, int columnBrick) { // constructor used to initialize bricks w/specific length
         this.brickType = brickType;
         this.brickLength = brickLength;
         this.rowBrick = rowBrick;
         this.columnBrick = columnBrick;
     }
 
-    public Brick(int brickType, int rowBrick, int columnBrick) {
+    public Brick(int brickType, int rowBrick, int columnBrick) { // constructor used to initialize bricks w/o brick length argument
         this.brickLength = 5;
         this.brickType = brickType;
         this.rowBrick = rowBrick;
@@ -22,37 +20,37 @@ public class Brick extends Levels {
 
     public int getBrickType() {
         return brickType;
-    }
+    } // getter for brick type
 
     public void setBrickType(int brickType) {
         this.brickType = brickType;
-    }
+    } // setter for brick type
 
     public int getBrickLength() {
         return brickLength;
-    }
+    } // getter for length of brick
 
     public void setBrickLength(int brickLength) {
         this.brickLength = brickLength;
-    }
+    } // setter for length of brick
 
     public int getRowBrick() {
         return rowBrick;
-    }
+    } // getter for the row location of brick piece
 
-    public void setRowBrick(int rowBrick) {
+    public void setRowBrick(int rowBrick) { // setter for the row location of brick piece
         this.rowBrick = rowBrick;
     }
 
     public int getColumnBrick() {
         return columnBrick;
-    }
+    } // getter for the column location of brick piece
 
-    public void setColumnBrick(int columnBrick) {
+    public void setColumnBrick(int columnBrick) { // setter for column location of brick piece
         this.columnBrick = columnBrick;
     }
 
-    public void destroyBrick(){
+    public void destroyBrick(){ // decreases the the life of brick by 1
     }
 
 }

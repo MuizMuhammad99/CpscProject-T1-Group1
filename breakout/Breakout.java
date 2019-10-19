@@ -1,5 +1,3 @@
-package breakout;
-
 public class Breakout {
 	
 	public static Environment console = new Environment();

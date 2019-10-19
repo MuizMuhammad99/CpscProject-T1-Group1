@@ -1,5 +1,7 @@
 # CpscProject
 
-open file 'breakout'
-drag entire 'breakout' package into src
-run 'Breakout.java' class in package
+*For IntelliJ IDEA*
+
+1. open file 'breakout'
+2. drag entire 'breakout' package into src
+3. run 'Breakout.java' class in package

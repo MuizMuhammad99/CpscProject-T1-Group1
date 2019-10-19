@@ -1,11 +1,9 @@
-package breakout;
-
 public class Levels extends Breakout{
 	
-	Brick[] barrier;
+	Brick[] barrier; //Array that creates the space for playing field
 
 	public void level1() {
-		barrier = (new Brick[]{
+		barrier = (new Brick[]{  // inserts bricks into array given their parameters
 				new Brick(0, 2, 6),
 				new Brick(0, 2, 14),
 				new Brick(0, 2, 21),

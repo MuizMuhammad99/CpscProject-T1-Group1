@@ -1,3 +1,5 @@
+package breakout;
+
 public class Brick {
     private int brickType; // number of lives the bricks have
     private int brickLength; // the length of the brick

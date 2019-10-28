@@ -1,3 +1,5 @@
+package breakout;
+
 public class Levels extends Breakout{
 	
 	Brick[] barrier; //Array that creates the space for playing field
@@ -28,5 +30,9 @@ public class Levels extends Breakout{
 				new Brick(1, 7, 29),
 		});
 		console.drawBricks(barrier);
+	}
+
+	public Brick[] getBarrier() {
+		return barrier;
 	}
 }

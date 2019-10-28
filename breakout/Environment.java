@@ -1,3 +1,5 @@
+package breakout;
+
 public class Environment {
 	private String[][] background; // Array for playing field
 	int row, column;

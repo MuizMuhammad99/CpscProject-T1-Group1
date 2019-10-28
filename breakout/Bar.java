@@ -1,3 +1,5 @@
+package breakout;
+
 import java.util.Scanner;
 
 public class Bar extends Player{
@@ -44,5 +46,21 @@ public class Bar extends Player{
 			xcoord --;
 			console.setContent(ycoord, xcoord, "=");
 		}
+	}
+
+	public int getXcoord() {
+		return xcoord;
+	}
+
+	public void setXcoord(int xcoord) {
+		this.xcoord = xcoord;
+	}
+
+	public int getYcoord() {
+		return ycoord;
+	}
+
+	public void setYcoord(int ycoord) {
+		this.ycoord = ycoord;
 	}
 }

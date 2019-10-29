@@ -1,24 +1,268 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectFrameBounds">
-    <option name="x" value="366" />
-    <option name="y" value="32" />
-    <option name="width" value="811" />
+  <component name="ChangeListManager">
+    <list default="true" id="f411a43c-2ee8-4679-a9c6-e9a2c1b1bbbe" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/breakout/Balls.java" beforeDir="false" afterPath="$PROJECT_DIR$/breakout/BallsPlayerCharacter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/breakout/Bar.java" beforeDir="false" afterPath="$PROJECT_DIR$/breakout/BarPlayerCharacter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/breakout/Breakout.java" beforeDir="false" afterPath="$PROJECT_DIR$/breakout/Breakout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/breakout/Brick.java" beforeDir="false" afterPath="$PROJECT_DIR$/breakout/DestroyableElements.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/breakout/Environment.java" beforeDir="false" afterPath="$PROJECT_DIR$/breakout/Environment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/breakout/GUIAnimationApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/breakout/GUIAnimationApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/breakout/Levels.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/breakout/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/breakout/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/production/CpscProject-T1-Group1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/output/production/CpscProject-T1-Group1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/production/CpscProject-T1-Group1/breakout/Breakout.class" beforeDir="false" afterPath="$PROJECT_DIR$/output/production/CpscProject-T1-Group1/breakout/Breakout.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/production/CpscProject-T1-Group1/breakout/Brick.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/production/CpscProject-T1-Group1/breakout/Environment.class" beforeDir="false" afterPath="$PROJECT_DIR$/output/production/CpscProject-T1-Group1/breakout/Environment.class" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/output/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="testRunner" value="GRADLE" />
+    <option name="delegatedBuild" value="true" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/breakout/Breakout.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/breakout/GUIAnimationApp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/breakout/Player.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="25" lean-forward="true" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/breakout/Environment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+              <folding>
+                <element signature="e#3007#3008#0" expanded="true" />
+                <element signature="e#3028#3029#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/breakout/BarPlayerCharacter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-90">
+              <caret line="9" column="8" lean-forward="true" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/breakout/DestroyableElements.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="680">
+              <caret line="56" selection-start-line="56" selection-end-line="56" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="uml://JAVA/breakout.Player">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>JAVA</ID>
+              <OriginalElement>breakout.Player</OriginalElement>
+              <nodes>
+                <node x="833.75" y="0.0">javafx.application.Application</node>
+                <node x="93.5" y="288.0">breakout.Player</node>
+                <node x="0.0" y="587.0">breakout.BarPlayerCharacter</node>
+                <node x="398.0" y="575.5">breakout.DestroyableElements</node>
+                <node x="192.0" y="554.0">breakout.BallsPlayerCharacter</node>
+                <node x="391.0" y="144.0">breakout.Environment</node>
+                <node x="692.0" y="410.0">breakout.GUIAnimationApp</node>
+                <node x="1040.0" y="443.0">javafx.application.Application.Parameters</node>
+                <node x="246.0" y="0.0">breakout.Breakout</node>
+              </nodes>
+              <notes />
+              <edges>
+                <edge source="javafx.application.Application.Parameters" target="javafx.application.Application">
+                  <point x="0.0" y="-58.0" />
+                  <point x="1129.5" y="385.0" />
+                  <point x="1072.25" y="385.0" />
+                  <point x="79.5" y="180.0" />
+                </edge>
+                <edge source="breakout.BarPlayerCharacter" target="breakout.Player">
+                  <point x="0.0" y="-80.0" />
+                  <point x="86.0" y="529.0" />
+                  <point x="139.5" y="529.0" />
+                  <point x="-46.0" y="36.0" />
+                </edge>
+                <edge source="breakout.DestroyableElements" target="breakout.Environment">
+                  <point x="0.0" y="-91.5" />
+                  <point x="0.0" y="180.0" />
+                </edge>
+                <edge source="breakout.BallsPlayerCharacter" target="breakout.Player">
+                  <point x="0.0" y="-113.0" />
+                  <point x="285.0" y="529.0" />
+                  <point x="231.5" y="529.0" />
+                  <point x="46.0" y="36.0" />
+                </edge>
+                <edge source="breakout.Environment" target="breakout.Breakout">
+                  <point x="0.0" y="-180.0" />
+                  <point x="519.0" y="119.0" />
+                  <point x="365.25" y="119.0" />
+                  <point x="39.75" y="47.0" />
+                </edge>
+                <edge source="breakout.Player" target="breakout.Breakout">
+                  <point x="2.8421709430404007E-14" y="-36.0" />
+                  <point x="185.50000000000003" y="119.0" />
+                  <point x="285.75" y="119.0" />
+                  <point x="-39.75" y="47.0" />
+                </edge>
+                <edge source="breakout.GUIAnimationApp" target="javafx.application.Application">
+                  <point x="0.0" y="-91.0" />
+                  <point x="856.0" y="385.0" />
+                  <point x="913.25" y="385.0" />
+                  <point x="-79.5" y="180.0" />
+                </edge>
+              </edges>
+              <settings layout="Hierarchic Group" zoom="1.0" x="24.5" y="209.0" />
+              <SelectedNodes>
+                <node>breakout.Player</node>
+              </SelectedNodes>
+              <Categories>
+                <Category>Fields</Category>
+                <Category>Constructors</Category>
+                <Category>Methods</Category>
+                <Category>Properties</Category>
+                <Category>Inner Classes</Category>
+              </Categories>
+              <SCOPE>All</SCOPE>
+              <VISIBILITY>private</VISIBILITY>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/breakout/BallsPlayerCharacter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="21" column="26" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>level</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/breakout/Levels.java" />
+        <option value="$PROJECT_DIR$/breakout/Brick.java" />
+        <option value="$PROJECT_DIR$/breakout/Environment.java" />
+        <option value="$PROJECT_DIR$/breakout/BarPlayerCharacter.java" />
+        <option value="$PROJECT_DIR$/breakout/GUIAnimationApp.java" />
+        <option value="$PROJECT_DIR$/breakout/Breakout.java" />
+        <option value="$PROJECT_DIR$/breakout/Player.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="974" />
     <option name="height" value="1047" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="CpscProject-T1-Group1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CpscProject-T1-Group1" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CpscProject-T1-Group1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CpscProject-T1-Group1" type="462c0819:PsiDirectoryNode" />
+              <item name="breakout" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/breakout" />
   </component>
-  <component name="RunManager">
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.GUIAnimationApp">
+    <configuration name="Breakout" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="breakout.Breakout" />
+      <module name="CpscProject-T1-Group1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="breakout.DestroyableElements" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GUIAnimationApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="breakout.GUIAnimationApp" />
       <module name="CpscProject-T1-Group1" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="breakout.*" />
+          <option name="PATTERN" value="breakout.DestroyableElements" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -29,7 +273,199 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.GUIAnimationApp" />
+        <item itemvalue="Application.Breakout" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f411a43c-2ee8-4679-a9c6-e9a2c1b1bbbe" name="Default Changelist" comment="" />
+      <created>1572338426737</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1572338426737</updated>
+      <workItem from="1572338427843" duration="1301000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1301000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <layout>
+      <window_info id="Image Layers" />
+      <window_info id="Designer" />
+      <window_info id="UI Designer" />
+      <window_info id="Capture Tool" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12153518" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Messages" weight="0.32932165" />
+      <window_info anchor="bottom" id="Database Changes" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32932165" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.032502707" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Maven" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/breakout/Levels.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="14" selection-start-line="4" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/breakout/BallsPlayerCharacter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="26" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/breakout.Player">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>breakout.Player</OriginalElement>
+          <nodes>
+            <node x="833.75" y="0.0">javafx.application.Application</node>
+            <node x="93.5" y="288.0">breakout.Player</node>
+            <node x="0.0" y="587.0">breakout.BarPlayerCharacter</node>
+            <node x="398.0" y="575.5">breakout.DestroyableElements</node>
+            <node x="192.0" y="554.0">breakout.BallsPlayerCharacter</node>
+            <node x="391.0" y="144.0">breakout.Environment</node>
+            <node x="692.0" y="410.0">breakout.GUIAnimationApp</node>
+            <node x="1040.0" y="443.0">javafx.application.Application.Parameters</node>
+            <node x="246.0" y="0.0">breakout.Breakout</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="javafx.application.Application.Parameters" target="javafx.application.Application">
+              <point x="0.0" y="-58.0" />
+              <point x="1129.5" y="385.0" />
+              <point x="1072.25" y="385.0" />
+              <point x="79.5" y="180.0" />
+            </edge>
+            <edge source="breakout.BarPlayerCharacter" target="breakout.Player">
+              <point x="0.0" y="-80.0" />
+              <point x="86.0" y="529.0" />
+              <point x="139.5" y="529.0" />
+              <point x="-46.0" y="36.0" />
+            </edge>
+            <edge source="breakout.DestroyableElements" target="breakout.Environment">
+              <point x="0.0" y="-91.5" />
+              <point x="0.0" y="180.0" />
+            </edge>
+            <edge source="breakout.BallsPlayerCharacter" target="breakout.Player">
+              <point x="0.0" y="-113.0" />
+              <point x="285.0" y="529.0" />
+              <point x="231.5" y="529.0" />
+              <point x="46.0" y="36.0" />
+            </edge>
+            <edge source="breakout.Environment" target="breakout.Breakout">
+              <point x="0.0" y="-180.0" />
+              <point x="519.0" y="119.0" />
+              <point x="365.25" y="119.0" />
+              <point x="39.75" y="47.0" />
+            </edge>
+            <edge source="breakout.Player" target="breakout.Breakout">
+              <point x="2.8421709430404007E-14" y="-36.0" />
+              <point x="185.50000000000003" y="119.0" />
+              <point x="285.75" y="119.0" />
+              <point x="-39.75" y="47.0" />
+            </edge>
+            <edge source="breakout.GUIAnimationApp" target="javafx.application.Application">
+              <point x="0.0" y="-91.0" />
+              <point x="856.0" y="385.0" />
+              <point x="913.25" y="385.0" />
+              <point x="-79.5" y="180.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="1.0" x="24.5" y="209.0" />
+          <SelectedNodes>
+            <node>breakout.Player</node>
+          </SelectedNodes>
+          <Categories>
+            <Category>Fields</Category>
+            <Category>Constructors</Category>
+            <Category>Methods</Category>
+            <Category>Properties</Category>
+            <Category>Inner Classes</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/breakout/BarPlayerCharacter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-90">
+          <caret line="9" column="8" lean-forward="true" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/breakout/DestroyableElements.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="56" selection-start-line="56" selection-end-line="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/breakout/Environment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+          <folding>
+            <element signature="e#3007#3008#0" expanded="true" />
+            <element signature="e#3028#3029#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/breakout/Breakout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/breakout/GUIAnimationApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/breakout/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="25" lean-forward="true" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

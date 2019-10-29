@@ -2,7 +2,7 @@ package breakout;
 
 public class Player extends Breakout{
 	
-	public static Bar gamer = new Bar();
+	public static BarPlayerCharacter gamer = new BarPlayerCharacter();
 	
 	public void Play() {
 	     gamer.initiateBar();

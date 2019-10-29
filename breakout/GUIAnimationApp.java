@@ -12,9 +12,9 @@ import javafx.stage.Stage;
 /** GUI */
 public class GUIAnimationApp extends Application {
 
-    boolean goLeft; // boolean to determine if user has pressed 'A'
-    boolean goRight; // boolean to determine if user has pressed 'D'
-    Bar bar = new Bar(); // creates a bar object
+    private boolean goLeft; // boolean to determine if user has pressed 'A'
+    private boolean goRight; // boolean to determine if user has pressed 'D'
+    private BarPlayerCharacter barPlayerCharacter = new BarPlayerCharacter(); // creates a barPlayerCharacter object
 
     @Override
     public void start(Stage primaryStage) {
@@ -58,24 +58,24 @@ public class GUIAnimationApp extends Application {
             @Override
             public void handle(long now) {
 
-                int x1 = ((bar.getXcoord()+17)*20); // scales the x coordinate for the left side of bar from the text-version to GUI
-                int x2 = ((bar.getXcoord()+17)*20)+100; // scales the x coordinate for the right side of bar from the text-version to GUI
-                int y1 = (bar.getYcoord()*40); // scales the y coordinate for the bar from the text-version to GUI
-                int y2 = (bar.getYcoord()*40); // scales the y coordinate for the bar from the text-version to GUI
+                int x1 = ((barPlayerCharacter.getXcoord()+17)*20); // scales the x coordinate for the left side of barPlayerCharacter from the text-version to GUI
+                int x2 = ((barPlayerCharacter.getXcoord()+17)*20)+100; // scales the x coordinate for the right side of barPlayerCharacter from the text-version to GUI
+                int y1 = (barPlayerCharacter.getYcoord()*40); // scales the y coordinate for the barPlayerCharacter from the text-version to GUI
+                int y2 = (barPlayerCharacter.getYcoord()*40); // scales the y coordinate for the barPlayerCharacter from the text-version to GUI
 
                 /** moves paddle left*/
-                if (goLeft && bar.getXcoord() > -16){ // makes sure paddle does not collide with left side of wall
+                if (goLeft && barPlayerCharacter.getXcoord() > -16){ // makes sure paddle does not collide with left side of wall
                     x1 -= 50; // moves the left side of paddle left
                     x2 -= 50; // moves the right side of paddle left
-                    bar.setXcoord(bar.getXcoord()-1); // stores the new x coordinate so that clearing canvas does not reset the paddle back to middle
+                    barPlayerCharacter.setXcoord(barPlayerCharacter.getXcoord()-1); // stores the new x coordinate so that clearing canvas does not reset the paddle back to middle
                 }
 
 
                 /** moves paddle right*/
-                if (goRight && bar.getXcoord() < 17){ // makes sure paddle does not collide with right side of wall
+                if (goRight && barPlayerCharacter.getXcoord() < 17){ // makes sure paddle does not collide with right side of wall
                     x1 += 50; // moves the left side of paddle right
                     x2 += 50; // moves the right side of paddle right
-                    bar.setXcoord(bar.getXcoord()+1); // stores the new x coordinate so that clearing canvas does not reset the paddle back to middle
+                    barPlayerCharacter.setXcoord(barPlayerCharacter.getXcoord()+1); // stores the new x coordinate so that clearing canvas does not reset the paddle back to middle
                 }
 
                 /** updates paddle to new location*/
@@ -85,11 +85,12 @@ public class GUIAnimationApp extends Application {
         };
         timer.start();
     }
-        /** updates paddle to new location*/
-        public void movePaddleTo(int x1, int y1, int x2, int y2, GraphicsContext gc){
-        gc.clearRect(6,500,789,75); // clears the general area around paddle
-        gc.strokeLine(x1,y1,x2,y2); // draws the new paddle with updated coordinates
-        }
+
+    /** updates paddle to new location*/
+    public void movePaddleTo(int x1, int y1, int x2, int y2, GraphicsContext gc){
+    gc.clearRect(6,500,789,75); // clears the general area around paddle
+    gc.strokeLine(x1,y1,x2,y2); // draws the new paddle with updated coordinates
+    }
 
     /** outlines the canvas to draw barrier */
     public void barrier(Stage primaryStage, Canvas canvas, GraphicsContext gc) {
@@ -105,28 +106,28 @@ public class GUIAnimationApp extends Application {
 
     /** function to draw bricks on GUI*/
     public void bricks(Stage primaryStage, Canvas canvas, GraphicsContext gc){
-        Levels level = new Levels(); // creates a new level object
+        Environment level = new Environment(); // creates a new level object
         level.level1(); // copies level 1 from level class
-        Brick[] levelArray = level.getBarrier(); // copies brick placements from level 1
+        DestroyableElements[] levelArray = level.getBarrier(); // copies brick placements from level 1
 
-        for(Brick brick: levelArray){
-            if(brick.getBrickType() == 0){ // checks if brick type is 0
+        for(DestroyableElements destroyableElements : levelArray){
+            if(destroyableElements.getBrickType() == 0){ // checks if destroyableElements type is 0
                 gc.setFill(Color.BLUE); // sets colour to blue
             }
-            else if(brick.getBrickType() == 1){ // checks if brick type is 1
+            else if(destroyableElements.getBrickType() == 1){ // checks if destroyableElements type is 1
                 gc.setFill(Color.CRIMSON); // sets colour to crimson
             }
-            else if(brick.getBrickType() == 2){ // checks if brick type is 2
+            else if(destroyableElements.getBrickType() == 2){ // checks if destroyableElements type is 2
                 gc.setFill(Color.ORANGE); // sets colour to orange
             }
-            else if(brick.getBrickType() == 3){ // checks if brick type is 3
+            else if(destroyableElements.getBrickType() == 3){ // checks if destroyableElements type is 3
                 gc.setFill(Color.FORESTGREEN); // sets colour to forest green
             }
-            else if(brick.getBrickType() == 4){ // checks if brick type is 4
+            else if(destroyableElements.getBrickType() == 4){ // checks if destroyableElements type is 4
                 gc.setFill(Color.BLACK); // sets colour to black
             }
 
-            gc.fillRect(brick.getColumnBrick()*20,brick.getRowBrick()*40,brick.getBrickLength()*20, 40); //draws the actual bricks on GUI based on their type, length and location on text-based version
+            gc.fillRect(destroyableElements.getColumnBrick()*20, destroyableElements.getRowBrick()*40, destroyableElements.getBrickLength()*20, 40); //draws the actual bricks on GUI based on their type, length and location on text-based version
         }
     }
 }

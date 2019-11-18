@@ -1,10 +1,11 @@
 package breakout;
 
-public class Environment {
-	
+public class Environment extends Breakout{
 	private String[][] background; // Array for playing field
-	int row, column;
-	
+	private int row, column;
+	private DestroyableElements[] barrier; //Array that creates the space for playing field
+
+
 	public Environment() { //default constructor
 		row = 15;
 		column = 40;
@@ -15,12 +16,6 @@ public class Environment {
 		row = r+1;
 		column = c+1;
 		background = new  String[row][column];
-	}
-	
-	public Environment(Environment e) {
-		background = e.background;
-		row = e.row;
-		column = e.column;
 	}
 	
 	public void setEnvironment() { // Creates the barrier around the game field
@@ -45,17 +40,16 @@ public class Environment {
 		}
 	}
 	
-	public void drawBrick(Brick brick){ // a method that draws a 'piece' of brick
-		for (int i = 0; i != brick.getBrickLength();i++){
-			setContent(brick.getRowBrick(),brick.getColumnBrick()+i, brick.getBrickType()+"");
+	public void drawBrick(DestroyableElements destroyableElements){ // a method that draws a 'piece' of destroyableElements
+		for (int i = 0; i != destroyableElements.getBrickLength(); i++){
+			background[destroyableElements.getRowBrick()][destroyableElements.getColumnBrick()+i] = destroyableElements.getBrickType() +"";
 		}
 	}
 
-
-	public void drawBricks(Brick[] bricks){ // a method that draws the entire brick
-		for (Brick brick: bricks){
-			for (int i = 0; i != brick.getBrickLength();i++){
-				setContent(brick.getRowBrick(),brick.getColumnBrick()+i, brick.getBrickType()+"");
+	public void drawBricks(DestroyableElements[] destroyableElements){ // a method that draws the entire brick
+		for (DestroyableElements elements : destroyableElements){
+			for (int i = 0; i != elements.getBrickLength(); i++){
+				background[elements.getRowBrick()][elements.getColumnBrick()+i] = elements.getBrickType() +"";
 			}
 		}
 	}
@@ -85,8 +79,37 @@ public class Environment {
 			System.out.println();
 		}
 	}
-	
-	public void drawEnvironment() {
-		
+
+	public void level1() {
+		barrier = (new DestroyableElements[]{  // inserts bricks into array given their parameters
+				new DestroyableElements(2, 2, 6),
+				new DestroyableElements(1, 2, 14),
+				new DestroyableElements(4, 2, 21),
+				new DestroyableElements(3, 2, 29),
+				new DestroyableElements(2, 3, 6),
+				new DestroyableElements(1, 3, 14),
+				new DestroyableElements(4, 3, 21),
+				new DestroyableElements(3, 3, 29),
+				new DestroyableElements(2, 5,2),
+				new DestroyableElements(1, 5,9),
+				new DestroyableElements(4,6, 5,17),
+				new DestroyableElements(3, 5,26),
+				new DestroyableElements(2, 5,33),
+				new DestroyableElements(1, 9,2),
+				new DestroyableElements(4, 9,9),
+				new DestroyableElements(3,6, 9,17),
+				new DestroyableElements(2, 9,26),
+				new DestroyableElements(1, 9,33),
+				new DestroyableElements(4, 7, 6),
+				new DestroyableElements(3, 7, 14),
+				new DestroyableElements(2, 7, 21),
+				new DestroyableElements(1, 7, 29),
+		});
+		console.drawBricks(barrier);
 	}
+
+	public DestroyableElements[] getBarrier() {
+		return barrier;
+	}
+
 }

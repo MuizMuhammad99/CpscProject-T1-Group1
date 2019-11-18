@@ -1,8 +1,6 @@
 package breakout;
 
-import java.util.Scanner;
-
-public class Bar extends Player{
+public class Bar extends Player {
 	
 	public Ball ball = super.getBall();
 	public int xcoord, ycoord = console.height()-1; // these coordinates are for the bottom left coordinates of the bar
@@ -16,28 +14,9 @@ public class Bar extends Player{
 			}
 		
 	}
+
 	
-	public void moveBar() { // method that reads the input and calls the respective methods to move the paddle left or right based on input
-		
-		char c='s';
-		System.out.println("\n Use 'a' and 'd' as arrows");
-			
-		while (true) {
-		
-			if (c == 'a' || c == 'A') { // 'a' is designated key for moving bar/paddle left
-				gamer.moveLeft();
-			} else if (c == 'd' || c == 'D') { // 'd' is designated key for moving bar/paddle right
-				gamer.moveRight();
-			} else if (c=='e' || c=='E'){
-				System.out.println("The END.");
-				//break;
-			}
-			console.printEnvironment();
-			c = reader.next().charAt(0); // will only consider the first character of whatever the user inputs
-		}
-	}
-	
-	public void moveBarCopy(char in) { // method that reads the input and calls the respective methods to move the paddle left or right based on input
+	public void moveBar(char in) { // method that reads the input and calls the respective methods to move the paddle left or right based on input
 		
 		char c = in;
 			if (c == 'a' || c == 'A') { // 'a' is designated key for moving bar/paddle left
@@ -66,6 +45,7 @@ public class Bar extends Player{
 			console.setContent(ycoord, xcoord, "=");
 		}
 	}
+
 
 	public int getXcoord() {
 		return xcoord;

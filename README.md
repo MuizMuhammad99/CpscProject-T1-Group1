@@ -14,6 +14,7 @@
 3. run 'Breakout.java' class or 'GUIAnimationApp.java' class in folder
 
 *For Console*
+***BEFORE YOU START MAKE SURE YOU HAVE "jfxrt.jar" FILE IN THE SAME FOLDER AS "breakout"***
 1) javac -cp .\jfxrt.jar ./*.java        ***must always be used***
 2) java GUIAnimationApp
 3) java Breakout

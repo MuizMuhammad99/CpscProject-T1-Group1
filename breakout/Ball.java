@@ -1,7 +1,7 @@
 package breakout;
 
 public class Ball {
-	Breakout breakout = new Breakout();
+	Breakout breakout = new  Breakout();
 	Environment console = breakout.getConsole();
 	private int xcoord;
 	private int ycoord = console.height()-2;

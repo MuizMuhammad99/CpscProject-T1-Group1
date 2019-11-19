@@ -1,5 +1,3 @@
-package breakout;
-
 public class BallGUI {
 	Breakout breakout = new Breakout();
 	Environment console = breakout.getConsole();

@@ -1,5 +1,3 @@
-package breakout;
-
 public class DestroyableElements extends Environment {
     private int brickType; // number of lives the bricks have
     private int brickLength; // the length of the brick

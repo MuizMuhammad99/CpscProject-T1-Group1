@@ -1,5 +1,3 @@
-package breakout;
-
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;

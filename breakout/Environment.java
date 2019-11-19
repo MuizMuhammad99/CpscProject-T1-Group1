@@ -1,5 +1,3 @@
-package breakout;
-
 public class Environment extends Breakout{
 	private String[][] background; // Array for playing field
 	private int row, column;

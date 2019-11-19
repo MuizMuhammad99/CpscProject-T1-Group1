@@ -1,5 +1,3 @@
-package breakout;
-
 public class Bar extends Player {
 	
 	public Ball ball = super.getBall();

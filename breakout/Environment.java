@@ -7,8 +7,8 @@ public class Environment extends Breakout{
 
 
 	public Environment() { //default constructor
-		row = 15;
-		column = 40;
+		row = 20;
+		column = 38;
 		background = new  String[row][column];
 	}
 	
@@ -112,4 +112,7 @@ public class Environment extends Breakout{
 		return barrier;
 	}
 
+	public void setBarrier(DestroyableElements[] barrier) {
+		this.barrier = barrier;
+	}
 }

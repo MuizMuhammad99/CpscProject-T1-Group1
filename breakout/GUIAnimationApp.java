@@ -9,6 +9,10 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+
 /** GUI */
 public class GUIAnimationApp extends Application {
 
@@ -17,6 +21,7 @@ public class GUIAnimationApp extends Application {
     private Bar bar = new Bar(); // creates a bar object
     private Player player = new Player();
     private BallGUI ball = new BallGUI();
+    Environment environment = new Environment();
 
     private boolean GO;
 
@@ -24,16 +29,17 @@ public class GUIAnimationApp extends Application {
     private double w;
     private double h;
 
-    private int refreshX = 8;
-    private int refreshY = 8;
+    private double refreshX = 8;
+    private double refreshY = 8;
+
+    private int score = 0;
 
 
     @Override
     public void start(Stage primaryStage) {
-        Canvas canvas = new Canvas(800, 760); // sets width to 800 x 600
+        Canvas canvas = new Canvas(1000, 760); // sets width to 800 x 760
         GraphicsContext gc = canvas.getGraphicsContext2D(); // draws the canvas
 
-        barrier(primaryStage, canvas, gc); // outlines the canvas
         Breakout breakout = new Breakout();
 
         Group root = new Group();
@@ -65,6 +71,9 @@ public class GUIAnimationApp extends Application {
 
             }
         });
+
+        environment.level1();
+
 
         primaryStage.show();
 
@@ -98,6 +107,10 @@ public class GUIAnimationApp extends Application {
                     bar.setXcoord(bar.getXcoord()+1); // stores the new x coordinate so that clearing canvas does not reset the paddle back to middle
                 }
 
+                if (GO){
+                    System.exit(0);
+                }
+
                 try
                 {
                     Thread.sleep(30);
@@ -113,7 +126,6 @@ public class GUIAnimationApp extends Application {
                 w = 20;
                 h = 20;
 
-                barrier( primaryStage, canvas, gc);
                 if (ball.getYcoord()> 760-17 || ball.getYcoord() < 3){
                     refreshY*=-1;
                 }
@@ -124,18 +136,79 @@ public class GUIAnimationApp extends Application {
                 if (ball.getXcoord() >= x1-1 && ball.getXcoord() <= x2+1){
                     if (ball.getYcoord() <= 724 && ball.getYcoord() >= 712) {
                         refreshY*=-1;
+                        //ball.setXcoord(ball.getXcoord()+10);
+                        /*
+                        if (ball.getXcoord() > x1 && ball.getXcoord() <x1+40){
+                            refreshY*=0.25;
+                            if (refreshY == 0){
+                                refreshY = 0.25;
+                            }
+                        }
+                        if (ball.getXcoord() > x1+60 && ball.getXcoord() <x1+100){
+                            refreshY*=0.75;
+                            if (refreshY == 0){
+                                refreshY = 0.75;
+                            }
+                        }
+
+                         */
                     }
                 }
+                gc.clearRect(20,20,770,700);
+                try {
+                    barrier(primaryStage, canvas, gc); // outlines the canvas
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                int tempInt = 0;
+                for(DestroyableElements brick: environment.getBarrier()){
+                    if (ball.getXcoord() >= brick.getBrickX() && ball.getXcoord() <= brick.getBrickLengthGUI()+brick.getBrickX() && ball.getYcoord() <= brick.getBrickY()+40 && ball.getYcoord() >= brick.getBrickY()){
+                        if(ball.getYcoord() <= brick.getBrickY()+40 && ball.getYcoord() >= brick.getBrickY()){
+                            refreshY *= -1;
+                        }
+                        if(ball.getXcoord() >= brick.getBrickX() && ball.getXcoord() <= brick.getBrickLengthGUI()+brick.getBrickX()){
+                            refreshX *= -1;
+                        }
+                        destroyBrick(brick);
+                        score +=10;
+                    }
+                    tempInt++;
+                }
+
                 ball.setXcoord(ball.getXcoord()+refreshX);
                 ball.setYcoord(ball.getYcoord()+refreshY);
 
-                System.out.println("x"+ ball.getXcoord() + "y" + ball.getYcoord());
+                if (score >= 530) {
+                    gc.setFill(Color.BLACK);
+                    gc.clearRect(0, 0, 1000, 760);
+                    gc.fillText("YOU WIN!", 500, 350);
+                    gc.fillText("SCORE: " + score, 500,380);
+                    ball.setXcoord(1500);
+                    ball.setYcoord(2000);
+                    x1 = 1200;
+                    x2 = 1300;
+                }
+
+                if (ball.getYcoord() >= 730){
+                    gc.setFill(Color.BLACK);
+                    gc.clearRect(0, 0, 1000, 760);
+                    gc.fillText("YOU LOSE!", 500, 350);
+                    gc.fillText("SCORE: " + score, 500,380);
+                    ball.setXcoord(1500);
+                    ball.setYcoord(2000);
+                    x1 = 1200;
+                    x2 = 1300;
+                }
+
+                //System.out.println("x"+ ball.getXcoord() + "y" + ball.getYcoord());
 
 
 
                 /** updates paddle to new location*/
                 movePaddleTo(x1,y1,x2,y2, gc); // moves the paddle around canvas
-
+                //System.out.println("                  " + x1);
+                //System.out.println("                  " + x2);
                 moveBallTo(ball.getXcoord(),ball.getYcoord(),w,h,gc);
             }
 
@@ -143,12 +216,24 @@ public class GUIAnimationApp extends Application {
         timer.start();
     }
 
+    private void destroyBrick(DestroyableElements brick) {
+        //System.out.println("Brick type:" + brick.getBrickType());
+        if(brick.getBrickType()!=-1){
+            brick.setBrickType(brick.getBrickType()-1);
+        }
+        if(brick.getBrickType() == -1){
+            ArrayList<DestroyableElements> tempArray = new ArrayList<>(Arrays.asList(environment.getBarrier()));
+            tempArray.remove(brick);
+            environment.setBarrier(tempArray.toArray(new DestroyableElements[tempArray.size()]));
+        }
+    }
+
     /** updates paddle to new location*/
     public void movePaddleTo(int x1, int y1, int x2, int y2, GraphicsContext gc){
         gc.clearRect(6,700,789,27); // clears the general area around paddle
         gc.strokeLine(x1,y1,x2,y2); // draws the new paddle with updated coordinates
-        System.out.println(y1);
-        System.out.println(y2);
+        //System.out.println(y1);
+        //System.out.println(y2);
     }
 
     public void moveBallTo(double x, double y, double w,double h, GraphicsContext gc){
@@ -157,22 +242,43 @@ public class GUIAnimationApp extends Application {
     }
 
     /** outlines the canvas to draw barrier */
-    public void barrier(Stage primaryStage, Canvas canvas, GraphicsContext gc) {
+    public void barrier(Stage primaryStage, Canvas canvas, GraphicsContext gc) throws InterruptedException {
+        gc.setFill(Color.BLACK);
         gc.setLineWidth(10);
         gc.strokeLine(0,0,800,0); // outlines top border of GUI
         gc.strokeLine(0,760,800,760); // outlines bottom border of GUI
         gc.strokeLine(0,0,0,800); // outlines left border of GUI
         gc.strokeLine(800,0,800,760); // outlines right border of GUI
-        // paddle(primaryStage,canvas,gc);
+
+        gc.strokeLine(800,0,1000,0);
+        gc.strokeLine(805,0,805,760);
+        gc.strokeLine(810,0,810,760);
+        gc.strokeLine(800,760,1000,760);
+        gc.strokeLine(1000,0,1000,760);
+
+
+        gc.clearRect(820,15,170,720);
+
+        gc.setFill(Color.BLACK);
+        gc.fillText("SCORE", 885,300);
+        gc.fillText("" + score, 885,350);
+
+       // if (score >= 30){
+          //  gc.clearRect(0,0,1000,760);
+          //  gc.fillText("YOU WIN!", 500,380);
+            //Thread.sleep(6000);
+            //System.exit(0);
+
+        //}
+
+
         bricks(primaryStage, canvas, gc); // places bricks on GUI
 
     }
 
     /** function to draw bricks on GUI*/
     public void bricks(Stage primaryStage, Canvas canvas, GraphicsContext gc){
-        Environment level = new Environment(); // creates a new level object
-        level.level1(); // copies level 1 from level class
-        DestroyableElements[] levelArray = level.getBarrier(); // copies brick placements from level 1
+        DestroyableElements[] levelArray = environment.getBarrier(); // copies brick placements from level 1
 
         for(DestroyableElements destroyableElements : levelArray){
             if(destroyableElements.getBrickType() == 0){ // checks if destroyableElements type is 0
@@ -194,34 +300,21 @@ public class GUIAnimationApp extends Application {
             gc.fillRect(destroyableElements.getColumnBrick()*20, destroyableElements.getRowBrick()*40, destroyableElements.getBrickLength()*20, 40); //draws the actual bricks on GUI based on their type, length and location on text-based version
         }
     }
-/*
-    public void ball(Stage primaryStage, Canvas canvas, GraphicsContext gc){
-        //gc.fillOval(breakout.getBall().getXcoord()*40, getBall().getYcoord()*20,5,5);
-        ballStart(primaryStage, canvas, gc);
 
-        if (topRight){
-            gc.setFill(Color.WHITE);
-            gc.fillOval(x-1,y-1,w+1.5 ,h+1.5);
-            gc.setFill(Color.DEEPPINK);
-            x += 100;
-            y -= 100;
-            gc.fillOval(x,y,w ,h);
-
-
-            return;
-        }
-
-        if (topLeft){
-            return;
-        }
-
-        if (bottomLeft){
-            return;
-        }
-
-        if (bottomRight){
-            return;
-        }
+    public double getRefreshX() {
+        return refreshX;
     }
-*/
+
+    public void setRefreshX(int refreshX) {
+        this.refreshX = refreshX;
+    }
+
+    public double getRefreshY() {
+        return refreshY;
+    }
+
+    public void setRefreshY(int refreshY) {
+        this.refreshY = refreshY;
+    }
+
 }

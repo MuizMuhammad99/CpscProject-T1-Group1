@@ -1,12 +1,18 @@
-public class Environment extends Breakout{
+package breakout;
+
+import java.util.ArrayList;
+
+public class Environment{
+//public class Environment {
+
 	private String[][] background; // Array for playing field
 	private int row, column;
-	private DestroyableElements[] barrier; //Array that creates the space for playing field
+	private ArrayList<DestroyableElements> barrier= new ArrayList<DestroyableElements>();; //Array that creates the space for playing field
 
 
 	public Environment() { //default constructor
-		row = 20;
-		column = 38;
+		row = 15;
+		column = 40;
 		background = new  String[row][column];
 	}
 	
@@ -37,24 +43,16 @@ public class Environment extends Breakout{
 			}
 		}
 	}
-	
-	public void drawBrick(DestroyableElements destroyableElements){ // a method that draws a 'piece' of destroyableElements
-		for (int i = 0; i != destroyableElements.getBrickLength(); i++){
-			background[destroyableElements.getRowBrick()][destroyableElements.getColumnBrick()+i] = destroyableElements.getBrickType() +"";
-		}
-	}
 
-	public void drawBricks(DestroyableElements[] destroyableElements){ // a method that draws the entire brick
-		for (DestroyableElements elements : destroyableElements){
-			for (int i = 0; i != elements.getBrickLength(); i++){
-				background[elements.getRowBrick()][elements.getColumnBrick()+i] = elements.getBrickType() +"";
-			}
-		}
-	}
 	
 	public void setContent(int r, int c, String value) {
 		background [r][c] = value;
 	} // method that assigns a character or word at any given space within the boundaries of the playing field
+	
+	public void setContent(int r, int c, int v) {
+		String value = v+"";
+		background [r][c] = value;
+	}
 	
 	public String getContent(int r, int c) { // getter to receive the value assigned at any location of the playing field
 		String content = background [r][c];
@@ -79,38 +77,41 @@ public class Environment extends Breakout{
 	}
 
 	public void level1() {
-		barrier = (new DestroyableElements[]{  // inserts bricks into array given their parameters
-				new DestroyableElements(2, 2, 6),
-				new DestroyableElements(1, 2, 14),
-				new DestroyableElements(4, 2, 21),
-				new DestroyableElements(3, 2, 29),
-				new DestroyableElements(2, 3, 6),
-				new DestroyableElements(1, 3, 14),
-				new DestroyableElements(4, 3, 21),
-				new DestroyableElements(3, 3, 29),
-				new DestroyableElements(2, 5,2),
-				new DestroyableElements(1, 5,9),
-				new DestroyableElements(4,6, 5,17),
-				new DestroyableElements(3, 5,26),
-				new DestroyableElements(2, 5,33),
-				new DestroyableElements(1, 9,2),
-				new DestroyableElements(4, 9,9),
-				new DestroyableElements(3,6, 9,17),
-				new DestroyableElements(2, 9,26),
-				new DestroyableElements(1, 9,33),
-				new DestroyableElements(4, 7, 6),
-				new DestroyableElements(3, 7, 14),
-				new DestroyableElements(2, 7, 21),
-				new DestroyableElements(1, 7, 29),
-		});
-		console.drawBricks(barrier);
+		
+		this.drawRowOfBricks(4, 0, 2, 3);
+		this.drawRowOfBricks(4, 1, 3, 3);
+		this.drawRowOfBricks(5, 2, 6, 2);
+		this.drawRowOfBricks(4, 0, 9, 3);
+		this.drawRowOfBricks(4, 1, 10, 3);
+	}
+	
+	public void drawRowOfBricks(int brickNum, int brickType, int brickRow, int spaceBetween) {
+		int numOfBricks=brickNum;
+		int typeOfBricks= brickType;
+		int rowOfBricks= brickRow;
+		
+		int spacing = spaceBetween;
+		int lengthOfBricks = (column-2*spacing) / numOfBricks - spacing;
+		
+		
+		for (int i = spacing+1 ; i < column-lengthOfBricks ; i+= lengthOfBricks+spacing) {
+			barrier.add(new DestroyableElements(typeOfBricks, lengthOfBricks,rowOfBricks,i));
+			
+			for (int j = 0 ; j < barrier.size() ; j++) {
+				int r, c, type, length;
+				length = barrier.get(j).getBrickLength();
+				r = barrier.get(j).getRowBrick();
+				c = barrier.get(j).getColumnBrick();
+				type = barrier.get(j).getBrickType();
+				for (int k = c ; k < c+length ; k++) {
+					this.setContent(r, k, type);
+				}
+			}
+		}
 	}
 
-	public DestroyableElements[] getBarrier() {
+	public ArrayList<DestroyableElements> getBarrier() {
 		return barrier;
 	}
 
-	public void setBarrier(DestroyableElements[] barrier) {
-		this.barrier = barrier;
-	}
 }

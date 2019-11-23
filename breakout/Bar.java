@@ -1,6 +1,6 @@
 public class Bar extends Player {
 	
-	public Ball ball = super.getBall();
+	public BallsPlayerCharacter ball = super.getBall();
 	public int xcoord, ycoord = console.height()-1; // these coordinates are for the bottom left coordinates of the bar
 	
 	

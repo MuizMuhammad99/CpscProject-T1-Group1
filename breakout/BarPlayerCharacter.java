@@ -1,5 +1,3 @@
-package breakout;
-
 import java.util.Scanner;
 
 public class BarPlayerCharacter extends Player{

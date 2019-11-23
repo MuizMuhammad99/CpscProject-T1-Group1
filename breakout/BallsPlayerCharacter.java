@@ -1,5 +1,3 @@
-package breakout;
-
 public class BallsPlayerCharacter extends Player {
 	Breakout breakout = new Breakout();
 	Environment console = breakout.getConsole();
@@ -166,7 +164,7 @@ public class BallsPlayerCharacter extends Player {
 					console.setContent(yco-y, xco+x," ");
 				} else {
 					int value = Integer.parseInt(element);
-					console.setContent(yco-y, xco+x,value-1);
+					console.setContent(yco-y, xco+x,value-1+"");
 				}
 				y*=-1;
 			}
@@ -178,7 +176,7 @@ public class BallsPlayerCharacter extends Player {
 				console.setContent(yco, xco+x," ");
 			} else {
 				int value = Integer.parseInt(element);
-				console.setContent(yco, xco+x,value-1);
+				console.setContent(yco, xco+x,value-1+"");
 			}
 			x*=-1;
 		}

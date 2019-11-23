@@ -1,5 +1,3 @@
-package breakout;
-
 public class DestroyableElements extends Environment {
     private int brickType; // number of lives the bricks have
     private int brickLength; // the length of the brick
@@ -36,17 +34,31 @@ public class DestroyableElements extends Environment {
         this.brickLength = brickLength;
     } // setter for length of brick
 
-    public int getRowBrick() {
-        return rowBrick;
-    } // getter for the row location of brick piece
-
     public void setRowBrick(int rowBrick) { // setter for the row location of brick piece
         this.rowBrick = rowBrick;
     }
 
+    public int getRowBrick() {
+        return rowBrick;
+    } // getter for the row location of brick piece
+
     public int getColumnBrick() {
         return columnBrick;
     } // getter for the column location of brick piece
+
+    public int getBrickY() {
+        return rowBrick*40;
+    } // getter for the row location of brick piece
+
+    public int getBrickX(){
+        return columnBrick*20;
+    } // getter for the column location of brick piece
+
+
+    public int getBrickLengthGUI() {
+        return brickLength*20;
+    } // getter for length of brick
+
 
     public void setColumnBrick(int columnBrick) { // setter for column location of brick piece
         this.columnBrick = columnBrick;

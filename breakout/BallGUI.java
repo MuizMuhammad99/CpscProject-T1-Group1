@@ -3,7 +3,7 @@ public class BallGUI {
 	Environment console = breakout.getConsole();
 	private double xcoord;
 	private double ycoord = console.height()-2;
-	Bar bar = breakout.getBar();
+	BarPlayerCharacter bar = breakout.getBar();
 
 	public BallGUI(BallGUI ball) {
 		this.xcoord = ball.getXcoord();

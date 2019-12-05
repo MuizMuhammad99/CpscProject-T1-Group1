@@ -1,3 +1,8 @@
+/**
+ * @author T1 Group 1
+ * CPSC 233 Fall 2019
+ */
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -30,7 +35,8 @@ public class GUIAnimationApp extends Application {
     private double refreshY = 8;
 
     private int score = 0;
-
+    
+    
 
     @Override
     public void start(Stage primaryStage) {
@@ -76,7 +82,9 @@ public class GUIAnimationApp extends Application {
         primaryStage.show();
 
 
-        /** animation created to refresh scene and update paddle*/
+        /**
+         * animation created to refresh scene and update paddle
+         */
         AnimationTimer timer = new AnimationTimer(){
             @Override
             public void handle(long now) {
@@ -302,18 +310,38 @@ public class GUIAnimationApp extends Application {
             gc.fillRect(destroyableElements.getColumnBrick()*20, destroyableElements.getRowBrick()*40, destroyableElements.getBrickLength()*20, 40); //draws the actual bricks on GUI based on their type, length and location on text-based version
         }
     }
+    
+    //Getters
+    /**
+     * @return refreshX
+     */
 
     public double getRefreshX() {
         return refreshX;
     }
+    
+    /**
+     * @return refreshY
+     */
+    
+    public double getRefreshY() {
+        return refreshY;
+    }
+    
+    //Setters
+    /**
+     * @param refreshX
+     */
 
     public void setRefreshX(int refreshX) {
         this.refreshX = refreshX;
     }
+    
+    /**
+     * @param refreshY
+     */
 
-    public double getRefreshY() {
-        return refreshY;
-    }
+   
 
     public void setRefreshY(int refreshY) {
         this.refreshY = refreshY;

@@ -1,3 +1,5 @@
+package breakout;
+
 public class BallsPlayerCharacter extends Player {
 	Breakout breakout = new Breakout();
 	Environment console = breakout.getConsole();
@@ -9,10 +11,6 @@ public class BallsPlayerCharacter extends Player {
 	
 	public void initiateBall() {
 		
-			/*xcoord = (console.length()/2)-2;
-			for (int i= xcoord; i<= xcoord+2; i++) {
-				console.setContent(ycoord, i, "=");
-				}*/	
 			//text version:
 			bar.initiateBar();
 			xco = (console.length()/2-1);
@@ -142,7 +140,7 @@ public class BallsPlayerCharacter extends Player {
 		 if (xco >= console.length()- Math.abs(x) || xco <= Math.abs(x)) {
 		// Bounces off the sides
 				x*=-1;
-		} else if (yco < Math.abs(y)) {
+		} else if (yco < Math.abs(y+1)) {
 		// Bounces off the top
 			y*=-1;
 
@@ -164,7 +162,7 @@ public class BallsPlayerCharacter extends Player {
 					console.setContent(yco-y, xco+x," ");
 				} else {
 					int value = Integer.parseInt(element);
-					console.setContent(yco-y, xco+x,value-1+"");
+					console.setContent(yco-y, xco+x,value-1);
 				}
 				y*=-1;
 			}
@@ -172,13 +170,26 @@ public class BallsPlayerCharacter extends Player {
 	
 		else if (this.checkParallelCollision(x, y)){	// possible sideways collisions 
 			String element = this.checkParallelElements(x,y);
-			if(element.equals("0")) {
-				console.setContent(yco, xco+x," ");
+			System.out.println(element);
+			if (this.checkUpDownElement(x, y).equals(" ")) {
+				System.out.println("empty vertical loop");
+				if(element.equals("0")) {
+					console.setContent(yco, xco+x," ");
+				} else {
+					int value = Integer.parseInt(element);
+					console.setContent(yco, xco+x,value-1);
+				}
+				x*=-1;
 			} else {
-				int value = Integer.parseInt(element);
-				console.setContent(yco, xco+x,value-1+"");
+				if(element.equals("0")) {
+					console.setContent(yco-y, xco," ");
+				} else {
+					int value = Integer.parseInt(element);
+					console.setContent(yco-y, xco,value-1);
+				}
+				y*=-1;
 			}
-			x*=-1;
+			
 		}
 		values[0] = x;
 		values[1] = y;
@@ -200,6 +211,7 @@ public class BallsPlayerCharacter extends Player {
 	}
 	
 	public boolean checkParallelCollision(int x, int y) {
+		
 		if(console.getContent(yco-y, xco) != " ") {
 			return true;
 		}else if (console.getContent(yco, xco+x) != " ") {
@@ -211,6 +223,7 @@ public class BallsPlayerCharacter extends Player {
 	public String checkParallelElements(int x, int y) {
 		String vertical = console.getContent(yco-y, xco);
 		String horizontal = console.getContent(yco, xco+x);
+		System.out.println("checking parallel elements, vertical: " + vertical +", horzontal: "+horizontal);
 		if (vertical.equals(" ")) {
 			return horizontal;
 		}			

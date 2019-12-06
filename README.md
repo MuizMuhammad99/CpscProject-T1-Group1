@@ -40,5 +40,5 @@ Winning the game will allow you to play endless mode, a mode that allows you to 
 1. press 'A' or "D" key and then enter to move paddle left or right
 2. repeat step 1 and try to hit the ball shown on console
 
-Bonus:
+BONUS:
 Winning the stage will automatically move you onto the next stage

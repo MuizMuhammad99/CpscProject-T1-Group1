@@ -5,6 +5,9 @@ public class Player extends Breakout{
 	public static BarPlayerCharacter gamer = new BarPlayerCharacter();
 	public static Scanner reader = new Scanner(System.in);
 
+	/**
+	 * initiates the visual updates for text-game
+	 */
 	public void Play() {
 
 		char ch = 's';

@@ -5,22 +5,28 @@ public class Breakout {
 	public static BallsPlayerCharacter ball = new BallsPlayerCharacter();
 
 
-
-
+	/**
+	 * main method
+	 * @param args is the main argument
+	 */
 	public static void main(String[] args) {
 		console.setEnvironment();
 		console.level2();
 		user.Play();
 	}
 
+	/**
+	 * getter for console
+	 * @return console
+	 */
 	public Environment getConsole() {
 		return console;
 	}
 
-	public BallsPlayerCharacter getBall() {
-		return ball;
-	}
-
+	/**
+	 * getter for bar
+	 * @return user.gamer
+	 */
 	public BarPlayerCharacter getBar() {
 		return user.gamer;
 	}

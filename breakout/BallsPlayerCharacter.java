@@ -1,52 +1,33 @@
 public class BallsPlayerCharacter extends Player {
 	Breakout breakout = new Breakout();
 	Environment console = breakout.getConsole();
-	private int xcoord, ycoord = console.height()-3; // these coordinates are for the bottom left coordinates of the barPlayerCharacter
-	
-	// text version:		
+
+
+
 	int xco, yco = console.height()-2;
 	BarPlayerCharacter bar = breakout.getBar();
-	
+
+	/**
+	 *  places the ball half way in console
+	 */
 	public void initiateBall() {
-		
-			/*xcoord = (console.length()/2)-2;
-			for (int i= xcoord; i<= xcoord+2; i++) {
-				console.setContent(ycoord, i, "=");
-				}*/	
-			//text version:
+
 			bar.initiateBar();
 			xco = (console.length()/2-1);
 			console.setContent(yco, xco, "O");
 	}
-	
-	public int getXcoord() {
-		return xco;
-	}
 
-	public int getYcoord() {
-		return yco;
-	}
 	
 	// Start of Lateral Movements 
 	
 	// text version:
-	public void moveY(int y) {
-			console.setContent(yco, xco, " ");
-			yco-=y;
-			console.setContent(yco, xco, "O");
-	}
 
-	public void moveY(int x, int y) {
-
-		String prev = console.getContent(yco-y, xco+x);
-		System.out.println("y_Prev= "+prev+" | Coordinates: ("+(xco+x)+","+(yco-y)+")");
-			console.setContent(yco, xco, prev);
-			yco-=y;
-			console.setContent(yco, xco, "O");
-			System.out.println("moved to ("+xco+","+yco+")");
-	}
-	
-	public void moveY(int x, int y, String previous) {
+	/**
+	 * moves the y coordinate for the ball
+	 * @param y is the y coordinate for the ball
+	 * @param previous is the previous coordinates for the ball
+	 */
+	public void moveY(int y, String previous) {
 
 		String prev = previous;
 			console.setContent(yco, xco, prev);
@@ -54,14 +35,11 @@ public class BallsPlayerCharacter extends Player {
 			console.setContent(yco, xco, "O");
 	}
 
-	public void moveX(int x) {
-		
-			console.setContent(yco, xco, "-");
-			xco+=x;
-			console.setContent(yco, xco, "O");
-
-	}	
-
+	/**
+	 * moves the x coordinate for the ball
+	 * @param x is the x coordinate for the ball
+	 * @param y is the y coordinate for the ball
+	 */
 	public void moveX(int x, int y) {
 
 		String prev = console.getContent(yco-y, xco+x);
@@ -69,74 +47,38 @@ public class BallsPlayerCharacter extends Player {
 			xco+=x;
 			console.setContent(yco, xco, "O");
 	}
-	
-	public String preMoveX(int x, int y) {
+
+	/**
+	 * visual movement console update
+	 * @param x is the x coordinate for the ball
+	 * @return updated console
+	 */
+	public String preMoveX(int x) {
 		return console.getContent(yco, xco+x);
 	}
 	// end of text version
-	
-	
-	// Start of Diagonal Movements 
 
-	// start of GUI
-	public void moveUpRight() {
-		if(xcoord<console.length()-2) {
-			console.setContent(ycoord, xcoord, " ");
-			ycoord --;
-			xcoord ++;
-			console.setContent(ycoord-2, xcoord+2, " ");
-		}
-	}
-	
-	public void moveUpLeft() {
-		if(xcoord<console.length()-2) {
-			console.setContent(ycoord, xcoord, " ");
-			xcoord --;
-			ycoord --;
-			console.setContent(ycoord-2, xcoord-2, " ");
-		}
-	}
-	
-	public void moveDownRight() {
-		if(xcoord<console.length()-2) {
-			console.setContent(ycoord, xcoord, " ");
-			xcoord ++;
-			ycoord ++;
-			
-			console.setContent(ycoord+2, xcoord+2, " ");
-		}
-	}
-	
-	public void moveDownLeft() {
-		if(xcoord<console.length()-2) {
-			console.setContent(ycoord, xcoord, " ");
-			xcoord --;
-			ycoord ++;
-			console.setContent(ycoord+2, xcoord-2, " ");
-		}
-		}
-
-	public void wallBounceLeft(int xCoord) {
-		if(xCoord==2)
-			moveDownRight();
-	}
-
-	public void wallBounceRight(int xCoord) {
-		if(xCoord== -2) {            
-			moveDownLeft();
-		}
-	} // end of GUI
 	
 	//Start for text version
+
+	/**
+	 * moves ball diagonally
+	 * @param x is the x coordinate for the ball
+	 * @param y is the y coordinate for the ball
+	 */
 	public void moveDiagonally(int x, int y) { //move Diagonally
 		int X = x, Y=y;	
-		String previous = this.preMoveX(X, Y);
+		String previous = this.preMoveX(X);
 			this.moveX(X,Y);
-			X-=x;
-			this.moveY(X,Y,previous);	
+		this.moveY(Y,previous);
 	}
 
-
+	/**
+	 * flips the ball's direction
+	 * @param x is the x coordinate for the ball
+	 * @param y is the y coordinate for the ball
+	 * @return updated console
+	 */
 	public int[] moveDirection(int x, int y) {
 		int [] values = new int[2];
 		 if (xco >= console.length()- Math.abs(x) || xco <= Math.abs(x)) {
@@ -184,7 +126,13 @@ public class BallsPlayerCharacter extends Player {
 		values[1] = y;
 		return values;
 	}
-	
+
+	/**
+	 * Checks if ball is colliding diagonally with a brick
+	 * @param x is the x coordinate for the ball
+	 * @param y is the y coordinate for the ball
+	 * @return true or false if ball is colliding diagonally with a brick
+	 */
 	public boolean checkDiagonalCollision(int x, int y) {
 		
 		if (console.getContent(yco-y, xco+x) != " " && console.getContent(yco-y, xco+x) != "|") { // checks the diagonal next spot
@@ -194,11 +142,23 @@ public class BallsPlayerCharacter extends Player {
 		}		
 		return false;
 	}
-		
+
+	/**
+	 * Checks the value in diagonal brick that's about to be hit
+	 * @param x is the x coordinate for the ball
+	 * @param y is the y coordinate for the ball
+	 * @return the value of the diagonal brick
+	 */
 	public String checkDiagonalElements(int x, int y) {
 		return console.getContent(yco-y, xco+x);		
 	}
-	
+
+	/**
+	 *Checks for parallel collision
+	 * @param x is the x coordinate for the ball
+	 * @param y is the y coordinate for the ball
+	 * @return true or false if there is a collision
+ 	 */
 	public boolean checkParallelCollision(int x, int y) {
 		if(console.getContent(yco-y, xco) != " ") {
 			return true;
@@ -207,7 +167,13 @@ public class BallsPlayerCharacter extends Player {
 		}
 		return false;
 	}
-	
+
+	/**
+	 *Checks for element that is parallel to ball
+	 * @param x is the x coordinate for the ball
+	 * @param y is the y coordinate for the ball
+	 * @return returns the element
+	 */
 	public String checkParallelElements(int x, int y) {
 		String vertical = console.getContent(yco-y, xco);
 		String horizontal = console.getContent(yco, xco+x);
@@ -216,13 +182,6 @@ public class BallsPlayerCharacter extends Player {
 		}			
 		return vertical;		
 	}
-	
-	public String checkUpDownElement(int x, int y) {
-		String value = console.getContent(yco-y, xco);
-		if ( value != " ") {
-			return value;
-		}
-		return " ";
-	}	
+
 
 }

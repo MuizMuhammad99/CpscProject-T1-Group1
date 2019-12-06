@@ -11,37 +11,39 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 
 /** GUI */
 public class GUIAnimationApp extends Application {
 
     private boolean goLeft; // boolean to determine if user has pressed 'A'
     private boolean goRight; // boolean to determine if user has pressed 'D'
+    private boolean GO; // boolean to determine if user has pressed 'L'
+    private boolean faster; // boolean to determine if user has pressed 'J'
+    private boolean slower; // boolean to determine if user has pressed 'K'
+
     private Bar bar = new Bar(); // creates a bar object
-    private Player player = new Player();
     private BallGUI ball = new BallGUI();
     Environment environment = new Environment();
-
-    private boolean GO;
 
     private double w;
     private double h;
 
-    private double refreshX = 8;
-    private double refreshY = 8;
+    private double refreshX = 2;
+    private double refreshY = 2;
 
     private int score = 0;
-    
-    
+
 
     @Override
+
+    /**
+     * @param primaryStage is the stage in which everything is drawn
+     */
     public void start(Stage primaryStage) {
         environment = new Environment(20,38);
-        Canvas canvas = new Canvas(1000, 760); // sets width to 800 x 760
+        Canvas canvas = new Canvas(1000, 760); // sets width to 1000 x 760
         GraphicsContext gc = canvas.getGraphicsContext2D(); // draws the canvas
 
         Breakout breakout = new Breakout();
@@ -60,7 +62,11 @@ public class GUIAnimationApp extends Application {
                 case D: goRight = true; // changes goRight to True if key 'D' is pressed
                     break;
                 case L: GO = true;
-
+                    break;
+                case J: faster = true;
+                    break;
+                case K: slower = true;
+                    break;
             }
         });
 
@@ -72,7 +78,11 @@ public class GUIAnimationApp extends Application {
                 case D: goRight = false; // changes goRight to False if key 'D' is released
                     break;
                 case L: GO = false;
-
+                    break;
+                case J: faster = false;
+                    break;
+                case K: slower = false;
+                    break;
             }
         });
 
@@ -82,9 +92,7 @@ public class GUIAnimationApp extends Application {
         primaryStage.show();
 
 
-        /**
-         * animation created to refresh scene and update paddle
-         */
+        /** animation created to refresh scene and update paddle*/
         AnimationTimer timer = new AnimationTimer(){
             @Override
             public void handle(long now) {
@@ -93,7 +101,6 @@ public class GUIAnimationApp extends Application {
                 int x2 = ((bar.getXcoord()+17)*20)+100; // scales the x coordinate for the right side of bar from the text-version to GUI
                 int y1 = (bar.getYcoord()*38); // scales the y coordinate for the bar from the text-version to GUI
                 int y2 = (bar.getYcoord()*38); // scales the y coordinate for the bar from the text-version to GUI
-
 
 
 
@@ -163,24 +170,56 @@ public class GUIAnimationApp extends Application {
                     }
                 }
                 gc.clearRect(20,20,770,700);
-                try {
-                    barrier(primaryStage, canvas, gc); // outlines the canvas
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                barrier(gc); // outlines the canvas
 
                 int tempInt = 0;
                 for(DestroyableElements brick: environment.getBarrier()){
-                    if (ball.getXcoord() >= brick.getBrickX() && ball.getXcoord() <= brick.getBrickLengthGUI()+brick.getBrickX() && ball.getYcoord() <= brick.getBrickY()+40 && ball.getYcoord() >= brick.getBrickY()){
-                        if(ball.getYcoord() <= brick.getBrickY()+40 && ball.getYcoord() >= brick.getBrickY()){
-                            refreshY *= -1;
-                            refreshX *= -1;
+                    if (
+                            ball.getXcoord() >= brick.getBrickX() && //left
+                            ball.getYcoord() >= brick.getBrickY() && //top
+                            ball.getXcoord() <= brick.getBrickLengthGUI()+brick.getBrickX() && //right
+                            ball.getYcoord() <= brick.getBrickY()+40 //bottom
 
+                    ){
+                        /*
+                        if(
+                                ball.getYcoord() >= brick.getBrickY() || //Top
+                                ball.getYcoord() <= brick.getBrickY() + 40 //Bottom
+                        ){
+                            refreshY *= -1;
+                            //refreshX *= -1;
                         }
-                        if(ball.getXcoord() >= brick.getBrickX() && ball.getXcoord() <= brick.getBrickLengthGUI()+brick.getBrickX()){
+                        if(
+                                ball.getXcoord() >= brick.getBrickX() || //
+                                ball.getXcoord() <= brick.getBrickLengthGUI()+brick.getBrickX()
+                        ){
                             refreshX *= -1;
                         }
-                        destroyBrick(brick);
+                       */
+                        //LEFT COLLISION
+                        if (
+                            ball.getXcoord() >= brick.getBrickX()-5 && //left
+                            ball.getYcoord() >= brick.getBrickY()+5 && //top
+                            ball.getXcoord() <= brick.getBrickX() + brick.getBrickLengthGUI()+5 && //right
+                            ball.getYcoord() <= brick.getBrickY()+35 //bottom
+                        ){
+                            refreshX *= -1;
+                            destroyBrick(brick);
+                        }
+                        else if (
+                            ball.getXcoord() >= brick.getBrickX() && //left
+                            ball.getYcoord() >= brick.getBrickY()-5 && //top
+                            ball.getXcoord() <= brick.getBrickX() + brick.getBrickLengthGUI() && //right
+                            ball.getYcoord() <= brick.getBrickY()+45 //bottom
+                        ){
+                            refreshY *= -1;
+                            destroyBrick(brick);
+                        }
+
+
+                        //refreshX *= -1;
+
+
                         score +=10;
                     }
                     tempInt++;
@@ -194,10 +233,10 @@ public class GUIAnimationApp extends Application {
                     gc.clearRect(0, 0, 1000, 760);
                     gc.fillText("YOU WIN!", 500, 350);
                     gc.fillText("SCORE: " + score, 500,380);
-                    ball.setXcoord(1500);
-                    ball.setYcoord(2000);
-                    x1 = 1200;
-                    x2 = 1300;
+                    //ball.setXcoord(1500);
+                    //ball.setYcoord(2000);
+                    //x1 = 1200;
+                    //x2 = 1300;
                 }
 
                 if (ball.getYcoord() >= 730){
@@ -211,7 +250,56 @@ public class GUIAnimationApp extends Application {
                     x2 = 1300;
                 }
 
-                //System.out.println("x"+ ball.getXcoord() + "y" + ball.getYcoord());
+                /*
+                if (score == 100){
+                    setRefreshX(6);
+                    setRefreshY(6);
+                }
+                if (score == 200){
+                    setRefreshX(7);
+                    setRefreshY(7);
+                }
+                if (score == 300){
+                    setRefreshX(8);
+                    setRefreshY(8);
+                }
+                */
+
+                if (faster){
+                    if(getRefreshX() > 0){
+                        setRefreshX(getRefreshX() + 1);
+                    }
+                    if(getRefreshX() < 0){
+                        setRefreshX(getRefreshX() - 1);
+                    }
+
+                    if(getRefreshY() > 0){
+                        setRefreshY(getRefreshY() + 1);
+                    }
+                    if(getRefreshY() < 0){
+                        setRefreshY(getRefreshY() - 1);
+                    }
+                    System.out.println(getRefreshX());
+                    System.out.println(getRefreshY());
+                }
+
+                if (slower){
+                    if(getRefreshX() > 0){
+                        setRefreshX(getRefreshX()*0.50);
+                    }
+                    if(getRefreshX() < 0){
+                        setRefreshX(getRefreshX()*0.50);
+                    }
+
+                    if(getRefreshY() > 0){
+                        setRefreshY(getRefreshY()*0.50);
+                    }
+                    if(getRefreshY() < 0){
+                        setRefreshY(getRefreshY()*0.50);
+                    }
+                    System.out.println(getRefreshX());
+                    System.out.println(getRefreshY());
+                }
 
 
 
@@ -220,12 +308,16 @@ public class GUIAnimationApp extends Application {
                 //System.out.println("                  " + x1);
                 //System.out.println("                  " + x2);
                 moveBallTo(ball.getXcoord(),ball.getYcoord(),w,h,gc);
+                teleporters(gc);
             }
 
         };
         timer.start();
     }
 
+    /**
+     * @param brick is the brick which is hit by ball
+     */
     private void destroyBrick(DestroyableElements brick) {
         //System.out.println("Brick type:" + brick.getBrickType());
         if(brick.getBrickType()!=-1){
@@ -238,7 +330,13 @@ public class GUIAnimationApp extends Application {
         }
     }
 
-    /** updates paddle to new location*/
+    /** updates paddle to new location
+     * @param x1 is the top left x-coordinate of the paddle
+     * @param y1 is the top left y-coordinate of the paddle
+     * @param x2 is the top right x-coordinate of the paddle
+     * @param y2 is the top right y-coordinate of the paddle
+     * @param gc is used to call draw commands on canvas
+     */
     public void movePaddleTo(int x1, int y1, int x2, int y2, GraphicsContext gc){
         gc.clearRect(6,700,789,27); // clears the general area around paddle
         gc.strokeLine(x1,y1,x2,y2); // draws the new paddle with updated coordinates
@@ -246,13 +344,23 @@ public class GUIAnimationApp extends Application {
         //System.out.println(y2);
     }
 
+
+    /** updates ball to new location
+     * @param x is the top left x-coordinate of the ball
+     * @param y is the top left y-coordinate of the ball
+     * @param w is the width of the ball
+     * @param h is the height of the ball
+     * @param gc is used to call draw commands on canvas
+     */
     public void moveBallTo(double x, double y, double w,double h, GraphicsContext gc){
         gc.setFill(Color.DEEPPINK);
         gc.fillOval(x,y,w ,h);
     }
 
-    /** outlines the canvas to draw barrier */
-    public void barrier(Stage primaryStage, Canvas canvas, GraphicsContext gc) throws InterruptedException {
+    /** outlines the canvas to draw barrier
+     * @param gc is used to call draw commands on canvas
+     */
+    public void barrier(GraphicsContext gc) {
         gc.setFill(Color.BLACK);
         gc.setLineWidth(10);
         gc.strokeLine(0,0,800,0); // outlines top border of GUI
@@ -282,12 +390,14 @@ public class GUIAnimationApp extends Application {
         //}
 
 
-        bricks(primaryStage, canvas, gc); // places bricks on GUI
+        bricks(gc); // places bricks on GUI
 
     }
 
-    /** function to draw bricks on GUI*/
-    public void bricks(Stage primaryStage, Canvas canvas, GraphicsContext gc){
+    /** function to draw bricks on GUI
+     * @param gc is used to call draw commands on canvas
+     */
+    public void bricks(GraphicsContext gc){
         DestroyableElements[] levelArray = environment.getBarrier(); // copies brick placements from level 1
 
         for(DestroyableElements destroyableElements : levelArray){
@@ -310,40 +420,54 @@ public class GUIAnimationApp extends Application {
             gc.fillRect(destroyableElements.getColumnBrick()*20, destroyableElements.getRowBrick()*40, destroyableElements.getBrickLength()*20, 40); //draws the actual bricks on GUI based on their type, length and location on text-based version
         }
     }
-    
-    //Getters
+
+    /** draws teleporters to move ball
+     * @param gc is used to call draw commands on canvas
+     */
+
+    public void teleporters(GraphicsContext gc){
+        gc.setFill(Color.MEDIUMPURPLE); // sets colour to black
+        gc.fillRect(0,500,5,150);
+
+        if ((ball.getXcoord() >= 0 && ball.getXcoord() <= 8) && (ball.getYcoord() >= 490 && ball.getYcoord() <= 660)){
+            gc.setFill(Color.WHITE);
+            gc.fillOval(ball.getXcoord()-1,ball.getYcoord()-1,w+1.5 ,h+1.5);
+            ball.setXcoord(750);
+            ball.setYcoord(150);
+            gc.setFill(Color.BLACK); // sets colour to black
+
+
+        }
+
+        gc.fillRect(795,150,5,150);
+        gc.setFill(Color.BLACK); // sets colour to black
+    }
+
     /**
      * @return refreshX
      */
-
     public double getRefreshX() {
         return refreshX;
     }
-    
-    /**
-     * @return refreshY
-     */
-    
-    public double getRefreshY() {
-        return refreshY;
-    }
-    
-    //Setters
+
     /**
      * @param refreshX
      */
-
-    public void setRefreshX(int refreshX) {
+    public void setRefreshX(double refreshX) {
         this.refreshX = refreshX;
     }
-    
+
+    /**
+     * @return refreshY
+     */
+    public double getRefreshY() {
+        return refreshY;
+    }
+
     /**
      * @param refreshY
      */
-
-   
-
-    public void setRefreshY(int refreshY) {
+    public void setRefreshY(double refreshY){
         this.refreshY = refreshY;
     }
 

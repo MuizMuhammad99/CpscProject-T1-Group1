@@ -1,8 +1,3 @@
-/**
- * @author T1 Group 1
- * CPSC 233 Fall 2019
- */
-
 import java.util.ArrayList;
 
 public class Environment extends Breakout{
@@ -12,32 +7,20 @@ public class Environment extends Breakout{
 	private DestroyableElements[] barrier; //Array that creates the space for playing field
 	private ArrayList<DestroyableElements> barrier2= new ArrayList<DestroyableElements>();; //Array that creates the space for playing field
 
-	/**
-	 * default constructor
-	 */
-	public Environment() { 
+
+	public Environment() { //default constructor
 		row = 20;
 		column = 38;
 		background = new  String[row][column];
 	}
 	
-	/**
-	 * @param r
-	 * @param c
-	 * constructor initializing row and column
-	 */
-	
-	public Environment(int r, int c) { 
+	public Environment(int r, int c) { // constructor initializing row and column
 		row = r+1;
 		column = c+1;
 		background = new  String[row][column];
 	}
 	
-	/**
-	 * method that creates the barrier around the game field
-	 */
-	
-	public void setEnvironment() { 
+	public void setEnvironment() { // Creates the barrier around the game field
 		
 		for (int i = 0; i < row; i++) {
 			
@@ -59,23 +42,13 @@ public class Environment extends Breakout{
 		}
 	}
 	
-	/**
-	 * @param destroyableElements
-	 * method that draws a 'piece' of destroyableElements/brick
-	 */
-	
-	public void drawBrick(DestroyableElements destroyableElements){ 
+	public void drawBrick(DestroyableElements destroyableElements){ // a method that draws a 'piece' of destroyableElements
 		for (int i = 0; i != destroyableElements.getBrickLength(); i++){
 			background[destroyableElements.getRowBrick()][destroyableElements.getColumnBrick()+i] = destroyableElements.getBrickType() +"";
 		}
 	}
-	
-	/**
-	 * @param array with base type DestroyableElements
-	 * method that draws an entire brick
-	 */
 
-	public void drawBricks(DestroyableElements[] destroyableElements){ 
+	public void drawBricks(DestroyableElements[] destroyableElements){ // a method that draws the entire brick
 		for (DestroyableElements elements : destroyableElements){
 			for (int i = 0; i != elements.getBrickLength(); i++){
 				background[elements.getRowBrick()][elements.getColumnBrick()+i] = elements.getBrickType() +"";
@@ -83,47 +56,22 @@ public class Environment extends Breakout{
 		}
 	}
 	
-	/**
-	 * @param r
-	 * @param c
-	 * @param value
-	 * method that assigns a character or word at any given space within the boundaries of the playing field
-	 */
-	
 	public void setContent(int r, int c, String value) {
 		background [r][c] = value;
-	} 
+	} // method that assigns a character or word at any given space within the boundaries of the playing field
 	
-	/**
-	 
-	 * @param r
-	 * @param c
-	 * @return content
-	 * returns the value assigned at any location of the playing field
-	 */
-	
-	public String getContent(int r, int c) {  
+	public String getContent(int r, int c) { // getter to receive the value assigned at any location of the playing field
 		String content = background [r][c];
 		return content;
 	}
 	
-	/**
-	 * @return row-1
-	 * compensated value of row length without counting boarder on one side
-	 */
-	
 	public int height(){
 		return row-1; 
-	}
-	
-	/**
-	 * @return column-1
-	 * compensated value of column length without counting boarder on one side
-	 */
+	} // compensated value of row length without counting boarder on one side
 	
 	public int length(){
 		return column-1; 
-	}
+	} // compensated value of column length without counting boarder on one side
 	
 	public void printEnvironment() {
 		for (int i = 0 ; i < row ; i++) {
@@ -133,12 +81,9 @@ public class Environment extends Breakout{
 			System.out.println();
 		}
 	}
-	/**
-	 * method that inserts bricks into array given their parameters
-	 */
 
 	public void level1() {
-		barrier = (new DestroyableElements[]{  
+		barrier = (new DestroyableElements[]{  // inserts bricks into array given their parameters
 				new DestroyableElements(2, 2, 6),
 				new DestroyableElements(1, 2, 14),
 				new DestroyableElements(4, 2, 21),
@@ -174,14 +119,6 @@ public class Environment extends Breakout{
 		this.drawRowOfBricks(4, 0, 9, 3);
 		this.drawRowOfBricks(4, 1, 10, 3);
 	}
-	
-	/**
-	 * @param brickNum
-	 * @param brickType
-	 * @param brickRow
-	 * @param spaceBetween
-	 * method that creates rows of bricks with appropriate type and spacing 
-	 */
 
 
 	public void drawRowOfBricks(int brickNum, int brickType, int brickRow, int spaceBetween) {
@@ -208,40 +145,20 @@ public class Environment extends Breakout{
 			}
 		}
 	}
-	
-	//Getters
-	
-	/**
-	 * @return barrier
-	 */
+
+
 
 	public DestroyableElements[] getBarrier() {
 		return barrier;
 	}
-	
-	/**
-	 * @return barrier2
-	 */
-	
-	public ArrayList<DestroyableElements> getBarrier2() {
-		return barrier2;
-	}
-	
-	//Setters
-	
-	/**
-	 * @param array with base type DestroyableElements
-	 */
 
 	public void setBarrier(DestroyableElements[] barrier) {
 		this.barrier = barrier;
 	}
-	
-	/**
-	 * @param arraylist with base type DestroyableElements
-	 */
 
-	
+	public ArrayList<DestroyableElements> getBarrier2() {
+		return barrier2;
+	}
 
 	public void setBarrier2(ArrayList<DestroyableElements> barrier) {
 		this.barrier2 = barrier2;

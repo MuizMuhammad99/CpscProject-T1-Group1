@@ -16,8 +16,8 @@ public class Environment extends Breakout{
 	 * default constructor
 	 */
 	public Environment() {
-		row = 20;
-		column = 38;
+		row = 15;
+		column = 40;
 		background = new  String[row][column];
 	}
 
@@ -27,16 +27,19 @@ public class Environment extends Breakout{
 	 * @param c is the column
 	 */
 
-	public Environment(int r, int c) {
-		row = r+1;
-		column = c+1;
+	public Environment(int r, int c) { // constructor initializing row and column
+		this();
+		if (r>0 && c >0) {
+			row = r+1;
+			column = c+1;
+		}
 		background = new  String[row][column];
 	}
 
 	/**
 	 * method that creates the barrier around the game field
 	 */
-	public void setEnvironment() {
+	public void setEnvironment() { // Creates the barrier around the game field
 
 		for (int i = 0; i < row; i++) {
 
@@ -58,6 +61,8 @@ public class Environment extends Breakout{
 		}
 	}
 
+
+
 	/**
 	 * @param destroyableElements with base type DestroyableElements
 	 * method that draws an entire brick
@@ -76,6 +81,12 @@ public class Environment extends Breakout{
 	 * @param value is the bricktype placed in the respective row and column
 	 */
 	public void setContent(int r, int c, String value) {
+		background [r][c] = value;
+	}
+
+
+	public void setContent(int r, int c, int v) {
+		String value = v+"";
 		background [r][c] = value;
 	}
 
@@ -157,6 +168,35 @@ public class Environment extends Breakout{
 		this.drawRowOfBricks(5, 2, 6, 2);
 		this.drawRowOfBricks(4, 0, 9, 3);
 		this.drawRowOfBricks(4, 1, 10, 3);
+	}
+
+	public void level0() {
+		this.drawRowOfBricks(3, 0, this.row/3 ,6);
+	}
+
+	public boolean levelCleared() {
+		int counter=0;
+		for (int i = 1; i < this.row-2; i++ ) {
+			for (int j=1; j<this.column-1; j++) {
+				if (this.background[i][j].equals(" ") || this.background[i][j].equals("O"))
+					counter+=0;
+				else
+					counter++;
+			}
+		}
+		if (counter == 0) {
+			System.out.println("First level cleared! Next level starting now:");
+			return true;
+		}
+		return false;
+	}
+
+	public void clearConsole() {
+		for (int i = 1; i < this.row-1; i++ ) {
+			for (int j=1; j<this.column-1; j++) {
+				this.setContent(i,j," ");
+			}
+		}
 	}
 
 	/**

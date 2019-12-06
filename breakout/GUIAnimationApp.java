@@ -23,7 +23,7 @@ public class GUIAnimationApp extends Application {
     private boolean faster; // boolean to determine if user has pressed 'J'
     private boolean slower; // boolean to determine if user has pressed 'K'
 
-    private Bar bar = new Bar(); // creates a bar object
+    private Player player = new Player(); // creates a player object
     private BallGUI ball = new BallGUI();
     Environment environment = new Environment();
 
@@ -45,8 +45,6 @@ public class GUIAnimationApp extends Application {
         environment = new Environment(20,38);
         Canvas canvas = new Canvas(1000, 760); // sets width to 1000 x 760
         GraphicsContext gc = canvas.getGraphicsContext2D(); // draws the canvas
-
-        Breakout breakout = new Breakout();
 
         Group root = new Group();
         Scene scene = new Scene(root);
@@ -97,27 +95,27 @@ public class GUIAnimationApp extends Application {
             @Override
             public void handle(long now) {
 
-                int x1 = ((bar.getXcoord()+17)*20); // scales the x coordinate for the left side of bar from the text-version to GUI
-                int x2 = ((bar.getXcoord()+17)*20)+100; // scales the x coordinate for the right side of bar from the text-version to GUI
-                int y1 = (bar.getYcoord()*38); // scales the y coordinate for the bar from the text-version to GUI
-                int y2 = (bar.getYcoord()*38); // scales the y coordinate for the bar from the text-version to GUI
+                int x1 = ((player.getXcoord()+17)*20); // scales the x coordinate for the left side of player from the text-version to GUI
+                int x2 = ((player.getXcoord()+17)*20)+100; // scales the x coordinate for the right side of player from the text-version to GUI
+                int y1 = (player.getYcoord()*38); // scales the y coordinate for the player from the text-version to GUI
+                int y2 = (player.getYcoord()*38); // scales the y coordinate for the player from the text-version to GUI
 
 
 
 
                 /** moves paddle left*/
-                if (goLeft && bar.getXcoord() > -16){ // makes sure paddle does not collide with left side of wall
+                if (goLeft && player.getXcoord() > -16){ // makes sure paddle does not collide with left side of wall
                     x1 -= 50; // moves the left side of paddle left
                     x2 -= 50; // moves the right side of paddle left
-                    bar.setXcoord(bar.getXcoord()-1); // stores the new x coordinate so that clearing canvas does not reset the paddle back to middle
+                    player.setXcoord(player.getXcoord()-1); // stores the new x coordinate so that clearing canvas does not reset the paddle back to middle
                 }
 
 
                 /** moves paddle right*/
-                if (goRight && bar.getXcoord() < 17){ // makes sure paddle does not collide with right side of wall
+                if (goRight && player.getXcoord() < 17){ // makes sure paddle does not collide with right side of wall
                     x1 += 50; // moves the left side of paddle right
                     x2 += 50; // moves the right side of paddle right
-                    bar.setXcoord(bar.getXcoord()+1); // stores the new x coordinate so that clearing canvas does not reset the paddle back to middle
+                    player.setXcoord(player.getXcoord()+1); // stores the new x coordinate so that clearing canvas does not reset the paddle back to middle
                 }
 
                 if (GO){
@@ -151,28 +149,11 @@ public class GUIAnimationApp extends Application {
                     if (ball.getYcoord() <= 724 && ball.getYcoord() >= 712) {
                         refreshY*=-1;
 
-                        //ball.setXcoord(ball.getXcoord()+10);
-                        /*
-                        if (ball.getXcoord() > x1 && ball.getXcoord() <x1+40){
-                            refreshY*=0.25;
-                            if (refreshY == 0){
-                                refreshY = 0.25;
-                            }
-                        }
-                        if (ball.getXcoord() > x1+60 && ball.getXcoord() <x1+100){
-                            refreshY*=0.75;
-                            if (refreshY == 0){
-                                refreshY = 0.75;
-                            }
-                        }
-
-                         */
                     }
                 }
                 gc.clearRect(20,20,770,700);
                 barrier(gc); // outlines the canvas
 
-                int tempInt = 0;
                 for(DestroyableElements brick: environment.getBarrier()){
                     if (
                             ball.getXcoord() >= brick.getBrickX() && //left
@@ -181,22 +162,7 @@ public class GUIAnimationApp extends Application {
                             ball.getYcoord() <= brick.getBrickY()+40 //bottom
 
                     ){
-                        /*
-                        if(
-                                ball.getYcoord() >= brick.getBrickY() || //Top
-                                ball.getYcoord() <= brick.getBrickY() + 40 //Bottom
-                        ){
-                            refreshY *= -1;
-                            //refreshX *= -1;
-                        }
-                        if(
-                                ball.getXcoord() >= brick.getBrickX() || //
-                                ball.getXcoord() <= brick.getBrickLengthGUI()+brick.getBrickX()
-                        ){
-                            refreshX *= -1;
-                        }
-                       */
-                        //LEFT COLLISION
+
                         if (
                             ball.getXcoord() >= brick.getBrickX()-5 && //left
                             ball.getYcoord() >= brick.getBrickY()+5 && //top
@@ -216,13 +182,8 @@ public class GUIAnimationApp extends Application {
                             destroyBrick(brick);
                         }
 
-
-                        //refreshX *= -1;
-
-
                         score +=10;
                     }
-                    tempInt++;
                 }
 
                 ball.setXcoord(ball.getXcoord()+refreshX);
@@ -233,10 +194,6 @@ public class GUIAnimationApp extends Application {
                     gc.clearRect(0, 0, 1000, 760);
                     gc.fillText("YOU WIN!", 500, 350);
                     gc.fillText("SCORE: " + score, 500,380);
-                    //ball.setXcoord(1500);
-                    //ball.setYcoord(2000);
-                    //x1 = 1200;
-                    //x2 = 1300;
                 }
 
                 if (ball.getYcoord() >= 730){
@@ -249,21 +206,6 @@ public class GUIAnimationApp extends Application {
                     x1 = 1200;
                     x2 = 1300;
                 }
-
-                /*
-                if (score == 100){
-                    setRefreshX(6);
-                    setRefreshY(6);
-                }
-                if (score == 200){
-                    setRefreshX(7);
-                    setRefreshY(7);
-                }
-                if (score == 300){
-                    setRefreshX(8);
-                    setRefreshY(8);
-                }
-                */
 
                 if (faster){
                     if(getRefreshX() > 0){
@@ -279,8 +221,6 @@ public class GUIAnimationApp extends Application {
                     if(getRefreshY() < 0){
                         setRefreshY(getRefreshY() - 1);
                     }
-                    System.out.println(getRefreshX());
-                    System.out.println(getRefreshY());
                 }
 
                 if (slower){
@@ -297,16 +237,12 @@ public class GUIAnimationApp extends Application {
                     if(getRefreshY() < 0){
                         setRefreshY(getRefreshY()*0.50);
                     }
-                    System.out.println(getRefreshX());
-                    System.out.println(getRefreshY());
                 }
 
 
 
                 /** updates paddle to new location*/
                 movePaddleTo(x1,y1,x2,y2, gc); // moves the paddle around canvas
-                //System.out.println("                  " + x1);
-                //System.out.println("                  " + x2);
                 moveBallTo(ball.getXcoord(),ball.getYcoord(),w,h,gc);
                 teleporters(gc);
             }
@@ -319,7 +255,6 @@ public class GUIAnimationApp extends Application {
      * @param brick is the brick which is hit by ball
      */
     private void destroyBrick(DestroyableElements brick) {
-        //System.out.println("Brick type:" + brick.getBrickType());
         if(brick.getBrickType()!=-1){
             brick.setBrickType(brick.getBrickType()-1);
         }
@@ -340,8 +275,6 @@ public class GUIAnimationApp extends Application {
     public void movePaddleTo(int x1, int y1, int x2, int y2, GraphicsContext gc){
         gc.clearRect(6,700,789,27); // clears the general area around paddle
         gc.strokeLine(x1,y1,x2,y2); // draws the new paddle with updated coordinates
-        //System.out.println(y1);
-        //System.out.println(y2);
     }
 
 
@@ -443,28 +376,28 @@ public class GUIAnimationApp extends Application {
         gc.setFill(Color.BLACK); // sets colour to black
     }
 
-    /**
+    /** getter for refreshX
      * @return refreshX
      */
     public double getRefreshX() {
         return refreshX;
     }
 
-    /**
+    /**setter for refreshX
      * @param refreshX
      */
     public void setRefreshX(double refreshX) {
         this.refreshX = refreshX;
     }
 
-    /**
+    /**getter for refreshY
      * @return refreshY
      */
     public double getRefreshY() {
         return refreshY;
     }
 
-    /**
+    /**setter for refreshY
      * @param refreshY
      */
     public void setRefreshY(double refreshY){

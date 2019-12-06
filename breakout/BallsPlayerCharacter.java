@@ -81,11 +81,11 @@ public class BallsPlayerCharacter extends Player {
 	 */
 	public int[] moveDirection(int x, int y) {
 		int [] values = new int[2];
-		 if (xco >= console.length()- Math.abs(x) || xco <= Math.abs(x)) {
-		// Bounces off the sides
-				x*=-1;
-		} else if (yco < Math.abs(y)) {
-		// Bounces off the top
+		if (xco >= console.length()- Math.abs(x) || xco <= Math.abs(x)) {
+			// Bounces off the sides
+			x*=-1;
+		} else if (yco < Math.abs(y+1)) {
+			// Bounces off the top
 			y*=-1;
 
 		} else if (yco>=console.height()-1) {
@@ -95,7 +95,7 @@ public class BallsPlayerCharacter extends Player {
 		}
 
 		//Managing collisions with elements bellow
-						
+
 		if(this.checkDiagonalCollision(x,y)) { // if ball will collide with something
 
 			String element = this.checkDiagonalElements(x,y);
@@ -106,21 +106,34 @@ public class BallsPlayerCharacter extends Player {
 					console.setContent(yco-y, xco+x," ");
 				} else {
 					int value = Integer.parseInt(element);
-					console.setContent(yco-y, xco+x,value-1+"");
+					console.setContent(yco-y, xco+x,value-1);
 				}
 				y*=-1;
 			}
-		} 
-	
-		else if (this.checkParallelCollision(x, y)){	// possible sideways collisions 
+		}
+
+		else if (this.checkParallelCollision(x, y)){	// possible sideways collisions
 			String element = this.checkParallelElements(x,y);
-			if(element.equals("0")) {
-				console.setContent(yco, xco+x," ");
+			System.out.println(element);
+			if (this.checkUpDownElement(x, y).equals(" ")) {
+				System.out.println("empty vertical loop");
+				if(element.equals("0")) {
+					console.setContent(yco, xco+x," ");
+				} else {
+					int value = Integer.parseInt(element);
+					console.setContent(yco, xco+x,value-1);
+				}
+				x*=-1;
 			} else {
-				int value = Integer.parseInt(element);
-				console.setContent(yco, xco+x,value-1+"");
+				if(element.equals("0")) {
+					console.setContent(yco-y, xco," ");
+				} else {
+					int value = Integer.parseInt(element);
+					console.setContent(yco-y, xco,value-1);
+				}
+				y*=-1;
 			}
-			x*=-1;
+
 		}
 		values[0] = x;
 		values[1] = y;
@@ -181,6 +194,20 @@ public class BallsPlayerCharacter extends Player {
 			return horizontal;
 		}			
 		return vertical;		
+	}
+
+	/**
+	 * checks the element up and down
+	 * @param x is the x coordinate for the ball
+	 * @param y is the y coordinate for the ball
+	 * @return value as a String
+	 */
+	public String checkUpDownElement(int x, int y) {
+		String value = console.getContent(yco-y, xco);
+		if ( value != " ") {
+			return value;
+		}
+		return " ";
 	}
 
 

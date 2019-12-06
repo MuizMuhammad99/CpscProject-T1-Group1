@@ -11,7 +11,7 @@ public class Breakout {
 	 */
 	public static void main(String[] args) {
 		console.setEnvironment();
-		console.level2();
+		console.level0();
 		user.Play();
 	}
 

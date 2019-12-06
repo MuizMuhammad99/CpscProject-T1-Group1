@@ -46,7 +46,7 @@ public class Player extends Breakout{
      */
 	public void playLevel2() {
 		console.clearConsole();
-		console.level1();
+		console.level2();
 		char ch = 's';
 		gamer.initiateBar();
 		ball.initiateBall();

@@ -7,8 +7,8 @@ public class BreakoutTest {
 	@Test
 	public void test_Environment_constructor() {
 		Environment en = new Environment();
-		assertEquals("created default environment", 15, en.height());
-		assertEquals("created default environment", 40, en.length());
+		assertEquals("created default environment", 14, en.height());
+		assertEquals("created default environment", 39, en.length());
 	}
 	
 	@Test
@@ -21,8 +21,8 @@ public class BreakoutTest {
 	@Test
 	public void test_Environment_constructorWithInvalidParameter() {
 		Environment en = new Environment(-20,40);
-		assertEquals("created custom environment", 15, en.height());
-		assertEquals("created custom environment", 40, en.length());
+		assertEquals("created custom environment", 14, en.height());
+		assertEquals("created custom environment", 39, en.length());
 	}
 	
 	@Test

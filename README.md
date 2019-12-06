@@ -30,15 +30,14 @@
 3. Missing to paddle the ball will result in 'game over'
 
 BONUS:
-You may press the "J" key to speed the ball up
-You may press the "K" key to slow the ball down
-You may press the "L" key to close the application on command
-
-Winning the game will allow you to play endless mode, a mode that allows you to simply bounce the ball off the paddle endlessly.
+1. You may press the "J" key to speed the ball up
+2. You may press the "K" key to slow the ball down
+3. You may press the "L" key to close the application on command
+4. Winning the game will allow you to play endless mode, a mode that allows you to simply bounce the ball off the paddle endlessly.
 
 *How to Play the Text-Version*
 1. press 'A' or "D" key and then enter to move paddle left or right
 2. repeat step 1 and try to hit the ball shown on console
 
 BONUS:
-Winning the stage will automatically move you onto the next stage
+1. Winning the stage will automatically move you onto the next stage
